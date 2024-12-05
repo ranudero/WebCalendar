@@ -1,0 +1,19 @@
+### post test
+POST http://localhost:28852/event
+Accept: application/json
+Content-Type: application/json
+
+{
+  "event": "test event",
+  "date": "2024/12/05"
+}
+
+### post test with error
+POST http://localhost:28852/event
+Accept: application/json
+Content-Type: application/json
+
+{
+"event": "test event",
+"date": "2024-12-05"
+}

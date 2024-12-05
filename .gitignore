@@ -1,0 +1,23 @@
+### Project Specific ###
+
+### Lab specific ###
+
+Web Calendar/Back to the future
+Web Calendar/GET vs POST
+Web Calendar/Relax
+Web Calendar/What should I do today
+
+/Topics
+course-info.yaml
+course-remote-info.yaml
+
+
+### IDEA ###
+.idea/
+*.iml
+
+
+### Gradle ###
+.gradle/
+*build
+*out
