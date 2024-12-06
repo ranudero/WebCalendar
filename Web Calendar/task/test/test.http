@@ -25,7 +25,7 @@ Content-Type: application/json
 
 {
   "event": "third event",
-  "date": "2024-12-07"
+  "date": "2024-01-12"
 }
 
 ### get test today
@@ -33,3 +33,12 @@ GET http://localhost:28852/event/today
 
 ### get test all
 GET http://localhost:28852/event
+
+### get test find by id
+GET http://localhost:28852/event/3
+
+### delete test by id
+DELETE http://localhost:28852/event/3
+
+### get all events between dates
+GET http://localhost:28852/event?start_time=2024-12-01&end_time=2024-12-09

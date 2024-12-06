@@ -1,15 +1,15 @@
 package webCalendarSpring.services;
 
 import org.springframework.stereotype.Service;
+import webCalendarSpring.NoEventFoundException;
 import webCalendarSpring.domain.Event;
 import webCalendarSpring.dtos.EventRequestDTO;
 import webCalendarSpring.dtos.EventResponseDTO;
-import webCalendarSpring.dtos.EventsListDTO;
+import webCalendarSpring.dtos.EventDTO;
 import webCalendarSpring.repositories.EventRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,19 +27,37 @@ public class EventH2Service {
         return EventResponseDTO.from(event);
     }
 
-    public List<EventsListDTO> getTodayEvents() {
+    public List<EventDTO> getTodayEvents() {
 
         LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate formattedDate = LocalDate.parse(now.format(formatter));
         return eventRepository.findByDate(formattedDate).stream()
-                .map(EventsListDTO::from)
+                .map(EventDTO::from)
                 .collect(Collectors.toList());
     }
 
-    public List<EventsListDTO> getAllEvents() {
+    public List<EventDTO> getAllEvents() {
         return eventRepository.findAll().stream()
-                .map(EventsListDTO::from)
+                .map(EventDTO::from)
+                .collect(Collectors.toList());
+    }
+
+    public EventDTO getEventById(Long id) {
+        return eventRepository.findById(id)
+                .map(EventDTO::from)
+                .orElseThrow(NoEventFoundException::new);
+    }
+
+    public void deleteEventById(Long id) {
+        eventRepository.deleteById(id);
+    }
+
+    public List<EventDTO> getEventsByDate(String start, String end) {
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
+        return eventRepository.findByDateBetween(startDate, endDate).stream()
+                .map(EventDTO::from)
                 .collect(Collectors.toList());
     }
 }
