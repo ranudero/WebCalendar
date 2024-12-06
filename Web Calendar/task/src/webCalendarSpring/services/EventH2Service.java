@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EventH2Service {
@@ -27,25 +28,18 @@ public class EventH2Service {
     }
 
     public List<EventsListDTO> getTodayEvents() {
-        List<Event> events = new ArrayList<>();
-        List<EventsListDTO> eventsListDTOList = new ArrayList<>();
+
         LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate formattedDate = LocalDate.parse(now.format(formatter));
-        events = eventRepository.findByDate(formattedDate);
-        for (Event event : events) {
-            eventsListDTOList.add(EventsListDTO.from(event));
-        }
-        return eventsListDTOList;
+        return eventRepository.findByDate(formattedDate).stream()
+                .map(EventsListDTO::from)
+                .collect(Collectors.toList());
     }
 
     public List<EventsListDTO> getAllEvents() {
-        List<Event> events = new ArrayList<>();
-        List<EventsListDTO> eventsListDTOList = new ArrayList<>();
-        events = eventRepository.findAll();
-        for (Event event : events) {
-            eventsListDTOList.add(EventsListDTO.from(event));
-        }
-        return eventsListDTOList;
+        return eventRepository.findAll().stream()
+                .map(EventsListDTO::from)
+                .collect(Collectors.toList());
     }
 }
