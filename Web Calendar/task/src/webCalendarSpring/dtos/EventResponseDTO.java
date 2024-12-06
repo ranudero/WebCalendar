@@ -6,6 +6,6 @@ public record EventResponseDTO(String message, String event, String date) {
 
     public static EventResponseDTO from(Event event) {
         String stringDate = String.valueOf(event.getDate());
-        return new EventResponseDTO("The event has been added", event.getEvent(), stringDate);
+        return new EventResponseDTO("The event has been added!", event.getEvent(), stringDate);
     }
 }

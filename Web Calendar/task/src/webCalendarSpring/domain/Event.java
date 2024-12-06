@@ -6,19 +6,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 import java.time.LocalDate;
 
 @Entity
-@NoArgsConstructor
-@EqualsAndHashCode
-@Setter
-@Getter
+
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +21,11 @@ public class Event {
     private String event;
 
     @NotNull
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}")
+    //@Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}")
     private LocalDate date;
+
+    public Event() {
+    }
 
     public Event(String event, LocalDate date) {
         this.event = event;
@@ -37,4 +33,15 @@ public class Event {
 
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public @NotBlank String getEvent() {
+        return event;
+    }
+
+    public @NotNull LocalDate getDate() {
+        return date;
+    }
 }

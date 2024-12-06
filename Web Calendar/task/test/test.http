@@ -5,15 +5,31 @@ Content-Type: application/json
 
 {
   "event": "test event",
-  "date": "2024-12-05"
+  "date": "2024-12-06"
 }
 
-### post test with error
+### post test second input
 POST http://localhost:28852/event
 Accept: application/json
 Content-Type: application/json
 
 {
-"event": "test event",
-"date": "2024/12/05"
+"event": "second event",
+"date": "2024-12-06"
 }
+
+### post test input not today
+POST http://localhost:28852/event
+Accept: application/json
+Content-Type: application/json
+
+{
+  "event": "third event",
+  "date": "2024-12-07"
+}
+
+### get test today
+GET http://localhost:28852/event/today
+
+### get test all
+GET http://localhost:28852/event
