@@ -5,7 +5,7 @@ Content-Type: application/json
 
 {
   "event": "test event",
-  "date": "2024/12/05"
+  "date": "2024-12-05"
 }
 
 ### post test with error
@@ -15,5 +15,5 @@ Content-Type: application/json
 
 {
 "event": "test event",
-"date": "2024-12-05"
+"date": "2024/12/05"
 }
